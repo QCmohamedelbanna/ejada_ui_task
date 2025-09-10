@@ -1,0 +1,57 @@
+package utili;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Properties;
+
+public class SeleniumBase {
+    protected static WebDriver driver;
+    protected static WebDriverWait wait;
+    private static final Properties properties = new Properties();
+
+
+    public SeleniumBase(){}
+
+    public void setUp(){
+        String browser = get("browser").toLowerCase();
+        switch (browser){
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+            case "chrome":
+            default:
+                driver = new ChromeDriver();
+                break;
+
+        }
+        wait = new WebDriverWait(driver, Duration.ofMinutes(1));
+        driver.manage().window().maximize();
+    }
+
+    public void environmentSetup(){
+        String value = SeleniumConfig.getBase_URL();
+        driver.get(value);
+    }
+
+
+
+
+    public static String get(String key) {
+        try {
+            FileInputStream file = new FileInputStream("src/main/resources/cross-browser.properties");
+            properties.load(file);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load config.properties", e);
+        }
+        return properties.getProperty(key);
+    }
+
+
+
+}
