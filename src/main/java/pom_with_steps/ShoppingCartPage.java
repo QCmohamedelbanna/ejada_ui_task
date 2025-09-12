@@ -5,16 +5,21 @@ import io.cucumber.java.en.Then;
 import locators.InventoryLocators;
 import locators.ShoppingCartLocators;
 import org.testng.Assert;
+import utili.ScenariosContext;
 import utili.SeleniumActions;
 
 public class ShoppingCartPage {
+    private final ScenariosContext scenariosContext;
     SeleniumActions actions = new SeleniumActions();
-    InventoryPage inventoryPage = new InventoryPage();
+
     InventoryLocators inventoryLocators = new InventoryLocators();
     ShoppingCartLocators shoppingCartLocators = new ShoppingCartLocators();
     String cartItemNameTxt;
     String cartItemPriceTxt;
 
+    public ShoppingCartPage(ScenariosContext scenariosContext) {
+        this.scenariosContext = scenariosContext;
+    }
 
 
     @And("Users click on shopping cart link")
@@ -28,9 +33,9 @@ public class ShoppingCartPage {
         System.out.println("Product Name in the Shopping Cart is: " + cartItemNameTxt);
         cartItemPriceTxt = actions.getText(shoppingCartLocators.cartItemPriceTxt);
         System.out.println("Product Price in the Shopping Cart is: " + cartItemPriceTxt);
-        Assert.assertEquals(inventoryPage.itemNameTxt,cartItemNameTxt,
+        Assert.assertEquals(scenariosContext.itemNameTxt,cartItemNameTxt,
                 "Product Name isn't mapped well");
-        Assert.assertEquals(inventoryPage.itemPriceTxt, cartItemPriceTxt,
+        Assert.assertEquals(scenariosContext.itemPriceTxt, cartItemPriceTxt,
                 "Product Price isn't mapped well");
     }
 

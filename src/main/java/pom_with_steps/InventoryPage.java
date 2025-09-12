@@ -3,16 +3,20 @@ package pom_with_steps;
 import io.cucumber.java.en.When;
 import locators.InventoryLocators;
 import org.testng.asserts.SoftAssert;
+import utili.ScenariosContext;
 import utili.SeleniumActions;
 
 public class InventoryPage {
 
+    private final ScenariosContext scenariosContext;
     SeleniumActions actions = new SeleniumActions();
-    InventoryLocators inventoryLocators = new InventoryLocators();
+    private final InventoryLocators inventoryLocators = new InventoryLocators();
     String labelTxtOnBtn;
-    public String itemNameTxt;
-    public String itemPriceTxt;
     SoftAssert softAssert = new SoftAssert();
+
+    public InventoryPage(ScenariosContext scenariosContext) {
+        this.scenariosContext = scenariosContext;
+    }
 
     @When("Users select one of Products and click on Add to cart")
     public void usersClickOnAddProduct(){
@@ -20,17 +24,10 @@ public class InventoryPage {
         labelTxtOnBtn = actions.getText(inventoryLocators.addToCartBtn);
         System.out.println("Label Txt is: " +  labelTxtOnBtn);
         softAssert.assertEquals(labelTxtOnBtn,"Remove","Product isn't added to the Cart");
-        itemNameTxt = catchItemNameTxt();
-        itemPriceTxt = catchItemPriceTxt();
-
-    }
-
-    public String getItemNameTxt(){
-       return itemNameTxt;
-    }
-
-    public String getItemPriceTxt(){
-        return itemPriceTxt;
+        scenariosContext.itemNameTxt =  catchItemNameTxt();
+        System.out.println("Item Name text is: " + scenariosContext.itemNameTxt );
+        scenariosContext.itemPriceTxt = catchItemPriceTxt();
+        System.out.println("Item Price text is: " + scenariosContext.itemPriceTxt);
     }
 
     public String catchItemNameTxt(){
