@@ -2,18 +2,13 @@ package pom_with_steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import locators.InventoryLocators;
-import locators.ShoppingCartLocators;
+
 import org.testng.Assert;
 import utili.ScenariosContext;
-import utili.SeleniumActions;
+
 
 public class ShoppingCartPage {
     private final ScenariosContext scenariosContext;
-    SeleniumActions actions = new SeleniumActions();
-
-    InventoryLocators inventoryLocators = new InventoryLocators();
-    ShoppingCartLocators shoppingCartLocators = new ShoppingCartLocators();
     String cartItemNameTxt;
     String cartItemPriceTxt;
 
@@ -24,14 +19,14 @@ public class ShoppingCartPage {
 
     @And("Users click on shopping cart link")
     public void usersClickOnShoppingCartLink(){
-        actions.click(inventoryLocators.shoppingCartBtn);
+        scenariosContext.actions.click(scenariosContext.inventoryLocators.shoppingCartBtn);
     }
 
     @Then("Product should be added in the cart successfully")
     public void checkThatProductAddedToCartSuccessfully(){
-        cartItemNameTxt = actions.getText(shoppingCartLocators.cartItemNameTxt);
+        cartItemNameTxt = scenariosContext.actions.getText(scenariosContext.shoppingCartLocators.cartItemNameTxt);
         System.out.println("Product Name in the Shopping Cart is: " + cartItemNameTxt);
-        cartItemPriceTxt = actions.getText(shoppingCartLocators.cartItemPriceTxt);
+        cartItemPriceTxt = scenariosContext.actions.getText(scenariosContext.shoppingCartLocators.cartItemPriceTxt);
         System.out.println("Product Price in the Shopping Cart is: " + cartItemPriceTxt);
         Assert.assertEquals(scenariosContext.itemNameTxt,cartItemNameTxt,
                 "Product Name isn't mapped well");

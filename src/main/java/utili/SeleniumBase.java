@@ -18,7 +18,7 @@ public class SeleniumBase {
 
     public SeleniumBase(){}
 
-    public WebDriver setUp(){
+    public WebDriver seleniumSetup(){
         String browser = getBrowser("browser").toLowerCase();
         switch (browser){
             case "firefox":
