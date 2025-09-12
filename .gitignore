@@ -1,7 +1,7 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
-!**/src/TestBases/**/target/
+!**/src/loginTestsPackage.TestBases/**/target/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -29,7 +29,7 @@ target/
 /.nb-gradle/
 build/
 !**/src/main/**/build/
-!**/src/TestBases/**/build/
+!**/src/loginTestsPackage.TestBases/**/build/
 
 ### VS Code ###
 .vscode/

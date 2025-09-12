@@ -1,22 +1,13 @@
 package utili;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public class SeleniumActions extends SeleniumBase{
 
     public SeleniumActions() {
-    }
-
-    public List<WebElement> findElements(By path) {
-        wait.until(ExpectedConditions.elementToBeClickable(path));
-        return driver.findElements(path);
     }
 
     public void click(By path) {

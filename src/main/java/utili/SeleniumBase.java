@@ -18,20 +18,19 @@ public class SeleniumBase {
 
     public SeleniumBase(){}
 
-    public void setUp(){
-        String browser = get("browser").toLowerCase();
+    public WebDriver setUp(){
+        String browser = getBrowser("browser").toLowerCase();
         switch (browser){
             case "firefox":
                 driver = new FirefoxDriver();
                 break;
             case "chrome":
-            default:
                 driver = new ChromeDriver();
                 break;
-
         }
         wait = new WebDriverWait(driver, Duration.ofMinutes(1));
         driver.manage().window().maximize();
+        return driver;
     }
 
     public void environmentSetup(){
@@ -39,10 +38,7 @@ public class SeleniumBase {
         driver.get(value);
     }
 
-
-
-
-    public static String get(String key) {
+    public static String getBrowser(String key) {
         try {
             FileInputStream file = new FileInputStream("src/main/resources/cross-browser.properties");
             properties.load(file);
@@ -51,7 +47,5 @@ public class SeleniumBase {
         }
         return properties.getProperty(key);
     }
-
-
 
 }
