@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 public class CheckoutPageLocators {
 
+    public By InfoTxt = By.cssSelector("span[class='title']");
     public By firstNameFld = By.id("first-name");
     public By lastNameFld = By.id("last-name");
     public By postalCodeFld = By.id("postal-code");

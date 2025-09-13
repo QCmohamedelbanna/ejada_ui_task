@@ -1,4 +1,4 @@
-@RegressionTest
+@LoginScenarios
 Feature: Login Test with Valid and Invalid Scenarios
 
   Scenario: Users login successfully with valid username and password
